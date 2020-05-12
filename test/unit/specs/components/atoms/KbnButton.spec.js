@@ -32,5 +32,31 @@ describe('KbnButton',() => {
     })
   })
 
-  
+  describe('disabled',() => {
+    describe('デフォルト', () => {
+      it('disabled属性が付与されていないこと', () => {
+        const button = mount(KbnButton,{
+          propsData: {disabled: true }
+        })
+        expect(button.attributes().disabled).to.equal('disabled')
+      })
+    })
+
+    describe('false',() => {
+      it('disabled属性が付与されていないこと', () => {
+        const button = mount(KbnButton)
+        expect(button.attributes().disabled).to.be.an('undefined')
+      })
+    })
+  })
+})
+
+describe('イベント', () => {
+  describe('click', () => {
+    it('発行されていること', () => {
+      const button = mount(KbnButton)
+      button.trigger('click')
+      expect(button.emitted().click.length)
+    })
+  })
 })
