@@ -20,7 +20,16 @@ describe('KbnLoginForm', () => {
               expect(loginForm.vm.validation.email.required).to.equal(false)
             })
           })
+
+          describe('入力あり', () => {
+            it('validation.email.requiredがvalidであること', () => {
+              loginForm.setData({ email: 'foo@domain.com' })
+              expect(loginForm.vm.validation.emaik.required).to.equal(true)
+            })
+          })
         })
+
+        
       })
     })
   })
