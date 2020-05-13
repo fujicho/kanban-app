@@ -15,8 +15,9 @@ describe('KbnLoginForm', () => {
       describe('email', () => {
         describe('required', () => {
           describe('何も入力されていない', () => {
-            it('validation.email.requiredがinvalidであること' () => {
-              
+            it('validation.email.requiredがinvalidであること', () => {
+              loginForm.setData({ email: ''})
+              expect(loginForm.vm.validation.email.required).to.equal(false)
             })
           })
         })
