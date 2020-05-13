@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import * as types from './mutation-types'
-import { Auth, List, Task } from '../api';
+import { Auth, List, Task } from '../api'
 /* eslint-enable no-unused-vars */
 
 export default {
