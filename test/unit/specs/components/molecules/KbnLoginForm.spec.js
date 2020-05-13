@@ -29,8 +29,24 @@ describe('KbnLoginForm', () => {
           })
         })
 
-        
+        describe('format', () => {
+          describe('メールアドレス形式ではないフォーマット', () => {
+            it('validation.email.formatがinvalidであること',() => {
+              loginForm.setData({ email: 'foobar' })
+              expect(loginForm.vm.validation.email.format).to.equal(false)
+            })
+          })
+
+          describe('メールアドレス形式のフォーマット', () => {
+            it('validation.email.formatがvalidであること', () =>{
+              loginForm.setData({ email: 'foo@domain.com' })
+              expect(loginForm.vm.validation.email.format).to.equal(true)
+            })
+          })
+        })
       })
+
+      
     })
   })
 })
