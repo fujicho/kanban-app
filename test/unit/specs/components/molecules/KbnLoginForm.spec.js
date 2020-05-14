@@ -74,6 +74,20 @@ describe('KbnLoginForm', () => {
         loginForm.vm.$nextTick(done)
       })
 
+      it('validになること', () => {
+        loginForm.setData({
+          email: 'foo@domain.com',
+          password: '12345678'
+        })
+        expect(loginForm.vm.valid).to.equal(true)
+      })
+    })
+    describe('バリデーションNG項目あり', () => {
+      it('invalidになること', () => {
+        loginForm.setData({
+          email: 'foo@domain.com'
+        })
+      })
     })
   })
 })
