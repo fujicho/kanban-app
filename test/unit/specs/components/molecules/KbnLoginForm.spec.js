@@ -64,5 +64,16 @@ describe('KbnLoginForm', () => {
         })
       })
     })
+    
+    describe('valid', () => {
+      let loginForm
+      beforeEach(done => {
+        loginForm = mount(KbnLoginForm, {
+          propsData: { onlogin: () => {} }
+        })
+        loginForm.vm.$nextTick(done)
+      })
+
+    })
   })
 })
