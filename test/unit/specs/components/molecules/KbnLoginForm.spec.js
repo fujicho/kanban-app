@@ -85,9 +85,13 @@ describe('KbnLoginForm', () => {
     describe('バリデーションNG項目あり', () => {
       it('invalidになること', () => {
         loginForm.setData({
-          email: 'foo@domain.com'
+          email: 'foo@domain.com',
+          password: ''
         })
+        expect(loginForm.vm.valid).to.equal(false)
       })
     })
   })
+
+  
 })
