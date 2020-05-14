@@ -82,6 +82,7 @@ describe('KbnLoginForm', () => {
         expect(loginForm.vm.valid).to.equal(true)
       })
     })
+
     describe('バリデーションNG項目あり', () => {
       it('invalidになること', () => {
         loginForm.setData({
@@ -93,5 +94,25 @@ describe('KbnLoginForm', () => {
     })
   })
 
-  
+  describe('disableLoginAction', () => {
+    let loginForm
+    beforeEach(done => {
+      loginForm = mount(KbnLoginForm, {
+        propsData: {onlogin: () => {} }
+      })
+      loginForm.vm.$nextTick(done)
+    })
+
+    describe('バリデーションNG項目ある', () => {
+      it('ログイン処理は無効', () => {
+        loginForm.setData({
+          email: 'foo@domain.com',
+          password: ''
+        })
+        expect(loginForm.vm.disableLoginAction).to.equal(true)
+      })
+    })
+
+    
+  })
 })
