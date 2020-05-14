@@ -46,7 +46,23 @@ describe('KbnLoginForm', () => {
         })
       })
 
-      
+      describe('password', () => {
+        describe('required', () => {
+          describe('何も入力されていない', () => {
+            it('validation.password.requiredがinvalidであること', () => {
+              loginForm.setData({ password: '' })
+              expect(loginForm.vm.validation.password.required).to.equal(false)
+            })
+          })
+
+          describe('入力あり', () => {
+            it('validation.password.requiredがvalidであること', () => {
+              loginForm.setData({ password: 'xxx' })
+              expect(loginForm.vm.validation.password.required).to.equal(true)
+            })
+          })
+        })
+      })
     })
   })
 })
