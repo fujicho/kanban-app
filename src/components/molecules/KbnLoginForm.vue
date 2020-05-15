@@ -28,12 +28,12 @@
       </ul>
     </div>
     <div class="form-actions">
-      <KbnBUtton
+      <KbnButton
         :disabled="disableLoginAction"
         @click="handleClick"
       >
         ログイン
-      </KbnBUtton>
+      </KbnButton>
       <p
         v-if="progress"
         class="login-progress"
@@ -51,8 +51,46 @@
 </template>
 
 <script>
-export default {
+// KbnButtonをインポート
+import KbnButton from "@/components/atoms/KbnButton"
+// メールアドレスのフォーマットをチェックする正規表現
+const REGEX_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}.[0-9]{1,3}\])|([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$\
+const required = val => !!val.trim()
 
+export default {
+  name: 'KbnLoginForm'
+
+  components: {
+    KbnButton
+  },
+
+  props: {
+    onlogin: {
+      type: Function,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      email: '',
+      password: '',
+      progress: false,
+      error: ''
+    }
+  },
+
+  computed: {
+    validation: () {
+      return {
+        email: {
+          required: required(this.email),
+          format: REGEX_EMAIL.test(this.email)
+        },
+        
+      }
+    }
+  }
 }
 </script>
 
