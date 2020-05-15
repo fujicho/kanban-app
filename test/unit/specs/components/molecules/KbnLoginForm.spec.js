@@ -124,5 +124,20 @@ describe('KbnLoginForm', () => {
       })
     })
   })
-  
+
+  describe('onlogin', () => {
+    let loginForm
+    let onloginStub
+    beforeEach(done => {
+      onloginStub = sinon.stub()
+      loginForm = mount(KbnLoginForm, {
+        propsData: { onlogin: onloginStub }
+      })
+      loginForm.setData({
+        email: 'foo@domain.com',
+        password: '12345678'
+      })
+      loginForm.vm.$nextTick(done)
+    })
+  })
 })
