@@ -87,8 +87,47 @@ export default {
           required: required(this.email),
           format: REGEX_EMAIL.test(this.email)
         },
-        
+        password: {
+          required: required(this.password)
+        }
       }
+    },
+
+    valid () {
+      const validation = this.validation
+      const fields = Object.keys(validation)
+      let valid = true
+      for (let i = 0; i < fields.length; i++) {
+        const field = fields[i]
+        valid = Object.keys(validation[field])
+          .every(key => validation[field][key])
+        if (!valid) { break }
+      }
+      return valid
+    },
+
+    disableLoginAction () {
+      return !this.valid || this.progress
+    }
+  },
+
+  methods: {
+    resetError () {
+      this.error = ''
+    },
+
+    handleClick (ev) {
+      if (this.disableLoginAction) { return }
+      this.progress = true
+      this.$nextTick(() => {
+        this.onlogin({ email: this.email, password: this.password })
+          .catch(err => {
+            this.error = err.message
+          })
+          .then(() => {
+            this.progress = false
+          })
+      })
     }
   }
 }
