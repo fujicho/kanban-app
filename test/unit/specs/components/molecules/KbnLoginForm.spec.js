@@ -113,6 +113,16 @@ describe('KbnLoginForm', () => {
       })
     })
 
-    
+    describe('バリデーション項目すべてOKかつログイン処理中ではない', () => {
+      it('ログイン処理は無効', () => {
+        loginForm.setData({
+          email: 'foo@domain.com',
+          password: '12345678',
+          progress: true
+        })
+        expect(loginForm.vm.disableLoginAction).to.equal(true)
+      })
+    })
   })
+  
 })
