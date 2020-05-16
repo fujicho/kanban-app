@@ -67,8 +67,18 @@ describe('KbnLoginView', () => {
         loginView.vm.$nextTick(() => {
           expect($router.push.called).to.equal(true)
           expect($router.push.args[0][0].path).to.equal('/')
-          done
+          done()
+        })
+      })
+    })
 
+    describe('失敗', () => {
+      beforeEach(() => {
+        loginView = mount(KbnLoginView, {
+          stubs: {
+            'kbn-login-form': LoginFormComponentStub
+          },
+          store,
         })
       })
     })
