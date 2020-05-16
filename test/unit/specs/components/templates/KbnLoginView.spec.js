@@ -43,5 +43,34 @@ describe('KbnLoginView', () => {
     })
   })
 
-  
+  describe('ログイン', () => {
+    let loginView
+    describe('成功', () => {
+      beforeEach(() => {
+        loginView = mount(KbnLoginView, {
+          mocks: { $router },
+          stubs: {
+            'kbn-login-form': LoginFormComponentStub
+          },
+          store,
+          localVue
+        })
+      })
+
+      it('ボードページのルートにリダイレクトすること', done => {
+        // ログインアクションを成功とする
+        actions.login.resolves()
+
+        triggerLogin(loginView, LoginFormComponentStub)
+
+        // プロミスのフラッシュ
+        loginView.vm.$nextTick(() => {
+          expect($router.push.called).to.equal(true)
+          expect($router.push.args[0][0].path).to.equal('/')
+          done
+
+        })
+      })
+    })
+  })
 })
