@@ -2,10 +2,10 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import KbnLoginView from '@/components/templates/KbnLoginView'
 
-//　ローカルなVueコンストラクタを作成
+// ローカルなVueコンストラクタを作成
 const localVue = createLocalVue()
 
-//　ローカルなVueコンストラクタにVuexをインストール
+// ローカルなVueコンストラクタにVuexをインストール
 localVue.use(Vuex)
 
 describe('KbnLoginView', () => {
@@ -37,7 +37,7 @@ describe('KbnLoginView', () => {
     actions = {
       login: sinon.stub() // loginアクションのモック
     }
-    store = new Vuex.store({
+    store = new Vuex.Store({
       state: {},
       actions
     })
@@ -79,6 +79,27 @@ describe('KbnLoginView', () => {
             'kbn-login-form': LoginFormComponentStub
           },
           store,
+          localVue
+        })
+        sinon.spy(loginView.vm, 'throwReject')
+      })
+
+      afterEach(() => {
+        loginView.vm.throw.restore()
+      })
+
+      it('エラー処理が呼び出されること', done => {
+        const message = 'login failed'
+        actions.login.rejects(new Error(message))
+
+        triggerLogin(loginView, LoginFormComponentStub)
+
+        // プロミスのフラッシュ
+        loginView.vm.$nextTick(() => {
+          const callInfo = loginView.vm.throwReject
+          expect(callInfo.called).to.equal(true)
+          expect(callInfo.args[0][0].message).to.equal(message)
+          done()
         })
       })
     })
