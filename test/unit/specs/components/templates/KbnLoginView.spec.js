@@ -85,7 +85,7 @@ describe('KbnLoginView', () => {
       })
 
       afterEach(() => {
-        loginView.vm.throw.restore()
+        loginView.vm.throwReject.restore()
       })
 
       it('エラー処理が呼び出されること', done => {
