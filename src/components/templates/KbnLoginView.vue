@@ -5,8 +5,6 @@
   </div>
 </template>
 
-
-
 <script>
 import KbnLoginForm from '@/components/molecules/KbnLoginForm.vue'
 
@@ -15,7 +13,7 @@ export default {
 
   components: {
     KbnLoginForm
-  } ,
+  },
 
   methods: {
     handleLogin (authInfo) {
