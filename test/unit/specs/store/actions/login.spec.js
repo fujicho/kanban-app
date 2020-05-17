@@ -44,5 +44,17 @@ describe('loginアクション', () => {
       expect(commit.args[0][1].userId).to.equal(userId)
     })
   })
-  
+
+  describe('Auth.loginが失敗', () => {
+    beforeEach(done => {
+      const login = authInfo => Promise.reject(new Error('login failed'))
+      const action = mockLoginAction(login)
+      commit = sinon.spy()
+
+      // loginアクションの実行
+      future = action({ commit })
+      Vue.nextTick(done)
+    })
+    
+  })
 })
