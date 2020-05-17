@@ -1,5 +1,5 @@
 import KbnBoardView from '@/components/templates/KbnBoardView.vue'
-import KbnLoginView from '@/components/templates/KbnBoardLogin.vue'
+import KbnLoginView from '@/components/templates/KbnLoginView.vue'
 import KbnTaskDetailModal from '@/components/templates/KbnTaskDetailModal.vue'
 
 
@@ -18,3 +18,5 @@ export default[{
   path: '*',
   redirect: '/'
 }]
+
+
