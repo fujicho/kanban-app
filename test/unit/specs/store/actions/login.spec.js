@@ -1,4 +1,4 @@
-import Vue from "vue"
+import Vue from 'vue'
 import * as types from '@/store/mutation-types'
 
 // loginアクション内の依存関係をモック化する
@@ -37,10 +37,10 @@ describe('loginアクション', () => {
     })
 
     it('成功となること', () => {
-      // commmitが呼ばれているかチェック
+      // commitが呼ばれているかチェック
       expect(commit.called).to.equal(true)
       expect(commit.args[0][0]).to.equal(types.AUTH_LOGIN)
-      expect(commit.args[0][1].token).to.equal
+      expect(commit.args[0][1].token).to.equal(token)
       expect(commit.args[0][1].userId).to.equal(userId)
     })
   })
@@ -55,6 +55,16 @@ describe('loginアクション', () => {
       future = action({ commit })
       Vue.nextTick(done)
     })
-    
+
+    it('失敗となること', done => {
+      // commitが呼ばれてないかチェック
+      expect(commit.called).to.equal(false)
+
+      // エラーが投げられているかチェック
+      future.catch(err => {
+        expect(err.message).to.equal('login failed')
+        done()
+      })
+    })
   })
 })
