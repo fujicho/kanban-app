@@ -44,5 +44,13 @@ const setup = state => {
     }]
   })
 
-  
+  // ナビゲーションガードであるauthorizeTokenフックをインストール
+  router.beforeEach(mockAuthorizeToken(store))
+
+  // Appでマウントとしてラッパーを返す
+  return mount(App, {
+    localVue,
+    store,
+    router
+  })
 }
