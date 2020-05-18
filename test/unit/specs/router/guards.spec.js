@@ -27,4 +27,22 @@ const mockAuthorizeToken = store => {
   return storeMock.authorizeToken
 }
 
-// 
+// Vueアプリケーションをセットアップするヘルパー関数
+const setup = state => {
+  // Vuexストアの設定
+  const store = new Vuex.Store({ store })
+
+  // Vue Routerの設定
+  const router = new VueRouter({
+    routes: [{
+      path: '/',
+      component: Top,
+      meta: { requiresAuth: true }
+    },{
+      path: '/login',
+      component: Login
+    }]
+  })
+
+  
+}
