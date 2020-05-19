@@ -75,5 +75,10 @@ describe('beforeEachガードフック', () => {
     })
   })
 
-  
+  describe('認証トークンなし', () => {
+    it('/loginにリダイレクトして解決すること', () => {
+      const app = setup({})
+      expect(app.text()).to.equal('login')
+    })
+  })
 })
