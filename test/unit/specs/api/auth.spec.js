@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Auth API モジュールで利用するHTTPクライアントをモック化
-const mockAUth = adapter => {
+const mockAuth = adapter => {
   const injector = require('inject-loader!@/api/auth')
   const clientMock = injector({
     './client': axios.create({ adapter })
@@ -12,7 +12,8 @@ const mockAUth = adapter => {
 describe('Auth APIモジュール', () => {
   describe('login', () => {
     const token = '1234567890abcdef'
-    const userId = 'foo@domain.com'
+    const userId = 1
+    const address = 'foo@domain.com'
     const password = '12345678'
 
     describe('成功', () => {
