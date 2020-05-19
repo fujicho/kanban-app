@@ -54,3 +54,26 @@ const setup = state => {
     router
   })
 }
+
+// ローカルなVueコンストラクタを作成
+const localVue = createLocalVue()
+
+// ローカルなVueコンストラクタにVue RouterとVuexをインストール
+localVue.use(VueRouter)
+localVue.use(Vuex)
+
+describe('beforeEachガードフック', () => {
+  describe('認証トークンあり', () => {
+    it('そのまま解決すること', () => {
+      const app = setup({
+        auth: {
+          token: '1234567890abcdef',
+          userId: 1
+        }
+      })
+      expect(app.text()).to.equal('top')
+    })
+  })
+
+  
+})
