@@ -1,6 +1,6 @@
 import * as types from './mutation-types'
 
-export default{
+export default {
   [types.AUTH_LOGIN] (state, payload) {
     state.auth = payload
   },
